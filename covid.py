@@ -34,6 +34,3 @@ plt.show()
 
 # Data Aggregation
 world_df.groupby('Country_Region')
-
-
-
