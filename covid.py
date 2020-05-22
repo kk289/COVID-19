@@ -60,5 +60,14 @@ total_df.sort_values('DeathRate',ascending=False,inplace=True)
 axis = total_df.head(5).plot.barh(x='Country_Region',y = 'DeathRate');
 plt.show()
 
+# Train and test split
+def train_test_data_split(df,period=5):
+  #Excluding last 5 for the training set
+  train_data = df[:-period]
+  #Including last 5 for the test set
+  test_data =  df[-period:]
+  return train_data,test_data
+
+  
 
 
