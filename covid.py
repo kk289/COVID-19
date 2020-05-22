@@ -34,3 +34,13 @@ plt.show()
 
 # Data Aggregation
 world_df.groupby('Country_Region')
+
+country_cases_df = world_df.groupby('Country_Region')['ConfirmedCases'].sum().reset_index()
+country_cases_df.sort_values(["ConfirmedCases"],ascending=False,inplace=True)
+
+# 10 hotspots of covid 19 cases
+top_count = 10
+country_cases_df[:top_count].plot.bar(x = 'Country_Region', y ='ConfirmedCases')
+plt.show()
+
+
