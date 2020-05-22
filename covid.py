@@ -43,4 +43,22 @@ top_count = 10
 country_cases_df[:top_count].plot.bar(x = 'Country_Region', y ='ConfirmedCases')
 plt.show()
 
+# most death rated countries
+
+#Find sum of deaths per country
+country_death_df = world_df.groupby('Country_Region')['Fatalities'].sum().reset_index()
+
+#merge grouped cases and grouped deaths
+total_df = country_death_df.merge(country_cases_df)
+
+
+#Find death rate and sort in descending order
+total_df['DeathRate']   = (total_df.Fatalities / total_df.ConfirmedCases)*100
+total_df.sort_values('DeathRate',ascending=False,inplace=True)
+
+#bar chart with x = death rate and y = countries
+axis = total_df.head(5).plot.barh(x='Country_Region',y = 'DeathRate');
+plt.show()
+
+
 
