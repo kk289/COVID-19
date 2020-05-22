@@ -94,20 +94,20 @@ def mean_absolute_percentage_error(y_true, y_pred):
 def helper(df,countries):
   # train/test split, fitting the model, and predicting (5) days ahead
   train_data,test_data = train_test_data_split(df,5)
-   	pm = modeling(train_data)
+  pm = modeling(train_data)
   predictions_df = predictions(pm,5)
-   
+ 
   #finalizes resulting data frame output
-   results_df = predictions_df[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].merge(test_data)
+  results_df = predictions_df[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].merge(test_data)
   print(results_df)
-   
+
   #plots the historical data and predictions
   fig1 = pm.plot(predictions_df)
   fig1.suptitle(country,verticalalignment='center')
   fig2 = pm.plot_components(predictions_df)
   fig2.suptitle(country,verticalalignment='center')
-   print(country+' MAPE: '+str(mean_absolute_percentage_error(results_df['yhat'].iloc[0], results_df['y'].iloc[0])))
-   return results_df
+  print(country+' MAPE: '+str(mean_absolute_percentage_error(results_df['yhat'].iloc[0], results_df['y'].iloc[0])))
+  return results_df
 
 # Predict future cases for a given country?
 country_df = world_df.groupby(['Country_Region','Date'])[['ConfirmedCases','Fatalities']].sum().reset_index()
