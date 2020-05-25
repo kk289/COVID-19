@@ -4,6 +4,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from fbprophet import Prophet
 import seaborn as sns
+
 # %matplotlib inline
 
 #Load the csv data, creating pandas dataframe by persisting date format
@@ -50,7 +51,6 @@ country_death_df = world_df.groupby('Country_Region')['Fatalities'].sum().reset_
 
 #merge grouped cases and grouped deaths
 total_df = country_death_df.merge(country_cases_df)
-
 
 #Find death rate and sort in descending order
 total_df['DeathRate']   = (total_df.Fatalities / total_df.ConfirmedCases)*100
@@ -145,10 +145,8 @@ def countryWiseDeathPredictions(df,country):
   q3_rn_df = q3_rn_df.reset_index().drop(["index","ConfirmedCases","Country_Region"],axis= 1)
   return q3_rn_df
 
-
 countries = ['Italy']
 for country in countries:
    df = countryWiseDeathPredictions(world_df,country)
    results = helper(df,countries)
    results.head()
-
